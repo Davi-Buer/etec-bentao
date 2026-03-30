@@ -1,0 +1,15 @@
+name: lab-${APP_PORT:-8001}
+
+services:
+  app:
+    build: .
+    ports:
+      - "${APP_PORT:-8001}:3000"
+    environment:
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    command: redis-server --maxmemory 32mb --maxmemory-policy allkeys-lru
