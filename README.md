@@ -46,10 +46,14 @@ docker ps
 docker compose logs -f app
 
 # Open a Redis CLI and inspect data
+# (open the app in the browser and send some messages first!)
 docker compose exec redis redis-cli
-> KEYS *
-> GET hits
-> LRANGE messages 0 -1
+
+# Then type these commands at the 127.0.0.1:6379> prompt:
+# KEYS *
+# GET hits
+# LRANGE messages 0 -1
+# EXIT
 
 # Stop everything
 docker compose down
