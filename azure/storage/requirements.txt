@@ -1,0 +1,5 @@
+# Biblioteca oficial do Azure para Storage
+azure-storage-blob==12.19.0
+
+# Para carregar variáveis de ambiente do .env
+python-dotenv==1.0.0

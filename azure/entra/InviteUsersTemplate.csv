@@ -1,0 +1,2 @@
+﻿Email address to invite [inviteeEmail] Required,Redirection url [inviteRedirectURL] Required,Send invitation message (true or false) [sendEmail],Customized invitation message [customizedMessageBody],Display name of the user being invited [invitedUserDisplayName]
+meu@email.com,https://myapps.microsoft.com,true,Bem Vindo ao tenant da TBX TECH!,meu

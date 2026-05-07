@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Site no Azure 🚀</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">☁️</div>
+            <h1>Meu Primeiro Site no Azure!</h1>
+            <p class="subtitle">Hospedado em Azure Storage Account</p>
+        </header>
+
+        <main>
+            <section class="card">
+                <h2>👋 Olá, visitante!</h2>
+                <p>Este site está rodando direto do Azure Storage usando o recurso de <strong>Static Website Hosting</strong>.</p>
+                <p>Sem servidor, sem complicação! 😎</p>
+            </section>
+
+            <section class="card">
+                <h2>📊 Informações do Site</h2>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">🌍 Hospedagem</div>
+                        <div class="info-value">Azure Storage Account</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">⚡ Tecnologia</div>
+                        <div class="info-value">HTML + CSS + JS</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">💰 Custo</div>
+                        <div class="info-value">Praticamente zero!</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">🚀 Deploy</div>
+                        <div class="info-value" id="deploy-time">Carregando...</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>🎮 Teste Interativo</h2>
+                <p>Clique no botão para ver uma mensagem especial!</p>
+                <button onclick="mostrarMensagem()" class="btn">Clique Aqui!</button>
+                <div id="mensagem" class="mensagem-oculta"></div>
+            </section>
+
+            <section class="card">
+                <h2>📝 Seu Nome Aqui!</h2>
+                <p>Personalize este site escrevendo seu nome:</p>
+                <input type="text" id="nomeInput" placeholder="Digite seu nome..." class="input-nome">
+                <button onclick="saudar()" class="btn btn-secondary">Saudar</button>
+                <div id="saudacao" class="saudacao"></div>
+            </section>
+
+            <section class="card stats">
+                <h2>📈 Estatísticas em Tempo Real</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" id="visitors">0</div>
+                        <div class="stat-label">Visitantes Simulados</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="uptime">100%</div>
+                        <div class="stat-label">Uptime</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="speed">⚡</div>
+                        <div class="stat-label">Velocidade</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>🎓 Criado por: <span class="destaque">[SEU NOME AQUI]</span></p>
+            <p>📅 Data: <span id="data-atual"></span></p>
+            <p>💙 Feito com Azure Storage Account</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
