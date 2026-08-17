@@ -1,0 +1,59 @@
+# Este arquivo e a receita do robo.
+# Todo pipeline do mundo tem estas duas partes: um QUANDO e um O QUE.
+name: Publicar site
+
+# QUANDO isso deve acontecer
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:        # permite rodar na mao pelo botao "Run workflow"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+# O QUE deve ser feito
+jobs:
+
+  verificar:
+    name: 1 - Verificar os arquivos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pegar o codigo do projeto
+        uses: actions/checkout@v7
+
+      - name: Rodar as regras do projeto
+        run: python3 scripts/check.py
+
+  construir:
+    name: 2 - Construir o site
+    needs: verificar          # so roda se o passo 1 passou
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pegar o codigo do projeto
+        uses: actions/checkout@v7
+
+      - name: Transformar os textos em pagina
+        run: python3 scripts/build.py
+
+      - name: Guardar o site pronto
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: _site
+
+  publicar:
+    name: 3 - Publicar na internet
+    needs: construir          # so roda se o passo 2 passou
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Colocar no ar
+        id: deploy
+        uses: actions/deploy-pages@v5
