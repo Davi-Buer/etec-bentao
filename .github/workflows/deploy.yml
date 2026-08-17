@@ -17,6 +17,12 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+# A licao vive na pasta cicd/ deste repositorio.
+# Por isso os comandos (run) rodam de dentro de cicd/.
+defaults:
+  run:
+    working-directory: cicd
+
 # O QUE deve ser feito
 jobs:
 
@@ -44,7 +50,7 @@ jobs:
       - name: Guardar o site pronto
         uses: actions/upload-pages-artifact@v5
         with:
-          path: _site
+          path: cicd/_site       # caminho relativo a raiz do repositorio
 
   publicar:
     name: 3 - Publicar na internet

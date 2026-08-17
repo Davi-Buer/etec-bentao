@@ -16,7 +16,7 @@ Aba `Actions` → botao verde *"I understand my workflows, go ahead and enable t
 `Settings` → `Pages` → em **Source**, escolher **GitHub Actions**.
 
 **4. Escrever seu arquivo**
-Entre na pasta `alunos/` → `Add file` → `Create new file`.
+Entre na pasta `cicd/alunos/` → `Add file` → `Create new file`.
 Nome do arquivo: `seunome.md` (minusculo, sem espaco e sem acento).
 Conteudo:
 
@@ -40,7 +40,7 @@ Esse endereco e publico.
 
 ## As regras do projeto
 
-O passo 1 do pipeline (`scripts/check.py`) confere tres coisas:
+O passo 1 do pipeline (`cicd/scripts/check.py`) confere tres coisas:
 
 1. O nome do arquivo tem so letras minusculas, numeros, hifen e ponto.
 2. A primeira linha comeca com `# ` (o titulo).
@@ -53,7 +53,7 @@ Isso e integracao continua: o erro para antes de chegar em alguem.
 
 ## Exercicio: quebre de proposito
 
-Abra o seu arquivo em `alunos/`, **apague a linha do titulo** (a que comeca com `# `)
+Abra o seu arquivo em `cicd/alunos/`, **apague a linha do titulo** (a que comeca com `# `)
 e faca commit.
 
 Va na aba `Actions`. O passo 1 fica vermelho e os passos 2 e 3 ficam cinzas —
