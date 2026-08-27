@@ -1,0 +1,26 @@
+# Este workflow roda quando alguem ABRE um Pull Request.
+# Ele NAO publica nada. Ele so confere.
+# Por isso ele e o porteiro: nada entra na main sem passar por aqui.
+
+name: Conferir Pull Request
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    name: Verificar os arquivos
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pegar o codigo do Pull Request
+        uses: actions/checkout@v4
+
+      - name: Rodar as regras do projeto
+        run: python3 scripts/check.py
+
+      - name: Construir o site (so pra ver se constroi)
+        run: python3 scripts/build.py

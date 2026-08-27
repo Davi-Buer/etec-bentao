@@ -1,65 +1,48 @@
-# Este arquivo e a receita do robo.
-# Todo pipeline do mundo tem estas duas partes: um QUANDO e um O QUE.
-name: Publicar site
+# Este workflow roda depois que um Pull Request e aceito na main.
+# Ele confere de novo, constroi, e SO ENTAO publica —
+# e a publicacao espera um humano apertar o botao.
 
-# QUANDO isso deve acontecer
+name: Publicar site da turma
+
 on:
   push:
     branches: [main]
-  workflow_dispatch:        # permite rodar na mao pelo botao "Run workflow"
+  workflow_dispatch:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Se varios PRs forem aceitos seguidos, so a ultima publicacao importa.
 concurrency:
   group: pages
-  cancel-in-progress: false
+  cancel-in-progress: true
 
-# A licao vive na pasta cicd/ deste repositorio.
-# Por isso os comandos (run) rodam de dentro de cicd/.
-defaults:
-  run:
-    working-directory: cicd
-
-# O QUE deve ser feito
 jobs:
 
-  verificar:
-    name: 1 - Verificar os arquivos
+  construir:
+    name: 1 - Conferir e construir
     runs-on: ubuntu-latest
     steps:
-      - name: Pegar o codigo do projeto
-        uses: actions/checkout@v7
-
+      - uses: actions/checkout@v4
       - name: Rodar as regras do projeto
         run: python3 scripts/check.py
-
-  construir:
-    name: 2 - Construir o site
-    needs: verificar          # so roda se o passo 1 passou
-    runs-on: ubuntu-latest
-    steps:
-      - name: Pegar o codigo do projeto
-        uses: actions/checkout@v7
-
       - name: Transformar os textos em pagina
         run: python3 scripts/build.py
-
       - name: Guardar o site pronto
-        uses: actions/upload-pages-artifact@v5
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: cicd/_site       # caminho relativo a raiz do repositorio
+          path: _site
 
   publicar:
-    name: 3 - Publicar na internet
-    needs: construir          # so roda se o passo 2 passou
+    name: 2 - Publicar (precisa de aprovacao humana)
+    needs: construir
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
+      name: producao
       url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - name: Colocar no ar
         id: deploy
-        uses: actions/deploy-pages@v5
+        uses: actions/deploy-pages@v4
